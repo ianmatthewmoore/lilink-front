@@ -1,0 +1,83 @@
+.auth-type-text{
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.box-auth{
+    width: 90%;
+    padding: 1rem 2rem 0 2rem;
+}
+.text-sign-in{
+    font-size: 30px;
+    color: var(--color-darkblue);
+    font-family: var(--font-gothambold);
+}
+.text-sign-lilink{
+    font-size: 30px;
+    color: var(--color-pink);
+    font-family: var(--font-gothambold);
+}
+.text-email-font{
+    font-size: 14px;
+    color:#40455B
+    ;
+}
+.btn-google-connect{
+    width: 100%;
+    background-color: white;
+    border: 1px solid #E4E5E7;
+    color: #A0A0A0;
+    padding: 0.5rem 0;
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+}
+.input-auth{
+    width: 100%;
+    border: 1px solid #E4E5E7;
+    border-radius: 4px;
+    outline: none;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+}
+
+.input-auth::placeholder{
+    
+    color:#E4E5E7;
+
+}
+.modal-body {
+    padding: 0!important;
+}
+.label-remember{
+    color: black;
+    font-family: var(--font-gothambold);
+    font-size: 14px;
+}
+.btn-auth-send{
+    background-color: var(--color-pink);
+    width: 100%;
+    text-align: center;
+    padding: 0.65rem 0;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: var(--font-gothambold);
+}
+.text-under-auth{
+    font-size: 14px;
+    color: #A0A0A0;
+    font-family: var(--font-gothambold);
+}
+.joind-yet-auth{
+    border-top:1px solid #A0A0A0;
+    padding: 1rem 0;
+    text-align: center;
+}
+.join-now-text{
+    color: #641B31;
+
+}

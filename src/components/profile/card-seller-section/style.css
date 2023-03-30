@@ -1,0 +1,114 @@
+.card-user-info{
+    border: 1px solid #E3E4E5;
+    padding: 1rem 0.85rem;
+}
+.sep-card-info-text-user{
+    width: 100%;
+    height: 1px;
+    background-color:#E3E4E5 ;
+    margin: 1rem;
+}
+.pov-contact-seller{
+    border-top: 1px solid #E3E4E5;
+    border-bottom: 1px solid #E3E4E5;
+    padding: 1.25rem;
+}
+.user-title-heading-card{
+    font-weight: bolder;
+    font-size: 20px;
+    line-height: 150%;
+    color: #000000;
+}
+.card-pov-seller{
+    margin-top: 2.5rem;
+}
+.btn-contact-me-pov, .btn-contact-me-pov:hover{
+    width: 100%;
+    padding: 0.5rem 0;
+    background-color: transparent;
+    border: 2px solid #BD3E4A;
+    color: #BD3E4A;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.py-123{
+    padding: 0.15rem 0;
+}
+.card-user-info-pov-seller{
+    margin-left: 1rem;
+    padding: 1rem 0;
+}
+.main-data-user-ab{
+    width: 100%;
+}
+.pos-locate-user-seller{
+    display: flex;
+}
+
+.user-desc-heading-card{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 140%;    
+    color: #A0A0A0;
+}
+.user-rating-heading-card{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    
+    
+    color: #641B31;
+}
+.user-reveiew-heading-card{
+    font-size: 14px;
+    line-height: 150%;
+    
+    
+    color: #641B31;
+}
+.ref-card-user{
+    font-size: 13px;
+    line-height: 150%;
+    /* identical to box height, or 20px */
+    
+    margin-left: 0.5rem;
+    color: #A0A0A0;
+}
+.height-star-pof{
+    height: 18px;
+}
+.pos-locate-user-seller{
+    width: 50%;
+}
+.img-width{
+    width: 13px;
+    height: auto;
+}
+.text-ref-loca-user{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+    
+    
+    color: #000000;
+}
+.text-title-card-seller-info-text{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    /* or 22px */
+
+
+    color: #000000;
+}
+.text-desc-card-seller-info-text{
+    font-size: 14px;
+    line-height: 150%;
+    /* or 24px */
+    font-family: var(--font-futurabook);
+    
+    color: #A0A0A0;
+}

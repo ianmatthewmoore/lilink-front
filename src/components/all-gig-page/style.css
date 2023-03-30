@@ -1,0 +1,54 @@
+.gig-text-edit-text{
+    font-size: 16px;
+    line-height: 150%;
+    /* or 26px */
+
+
+    color: #40455B;
+}
+.ward-tex-edit{
+    width: 40%;
+}
+.btn-sec-edit-btn{
+    width: 80%;
+    padding: 0.5rem 0;
+    text-align: center;
+    border: 1px solid #000;
+    color: #000;
+    background-color: #fff;
+
+    outline: none;
+}
+.btn-sec-edit-pink-btn{
+    width: 80%;
+    padding: 0.5rem 0;
+    text-align: center;
+    border: 1px solid var(--color-pink);
+    background-color: var(--color-pink);
+    outline: none;
+    color: white;
+  
+    
+}
+.btn-sec-edit{
+    display: flex;
+    justify-content: flex-end;
+
+    width: 55%;
+}
+.box-about-edit-gig-sec{
+    width: 100%;
+    border: 1px solid var(--color-grey);
+    padding: 1rem;
+}
+.red-box-edit-content{
+    background-color: var(--color-red);
+    padding:0.75rem 1rem;
+    color: white;
+    font-size: 20px;
+    line-height: 150%;
+    /* identical to box height, or 32px */
+    font-family: var(--font-futurabook);
+
+    color: #FFFFFF;
+}

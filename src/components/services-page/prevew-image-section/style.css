@@ -1,0 +1,23 @@
+.bg-select-image{
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.preview-section-image-carousel{
+    width: 85%;
+}
+.text-desc-preview{
+    padding: 2rem 0 1rem 0;
+}
+.pos-left-img{
+    position: absolute;
+    bottom: 20%;
+    left: 5%;
+}
+.pos-right-elemnt{
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+}

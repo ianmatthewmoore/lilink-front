@@ -1,0 +1,13 @@
+.title-feedback-user{
+    font-size: 18px;
+    font-family: var(--font-gothambold);
+}
+.feedback-card-user{
+    padding: 2rem;
+    border: 0.5px solid rgba(14, 36, 58, 0.13);
+    box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.07);
+    width: 32%;
+}
+.feedback-providing{
+    margin-top: 22rem;
+}

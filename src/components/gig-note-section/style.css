@@ -1,0 +1,153 @@
+.border-box-container{
+    border: 1px solid var(--color-grey);
+    border-left: 15px solid var(--color-red);
+    padding: 2rem 0.75rem;
+}
+.border-box-container-no-red{
+    border: 1px solid var(--color-grey);
+    padding: 2rem 1.5rem;
+}
+.started-order-text{
+    font-weight: 700;
+font-size: 22px;
+line-height: 140%;
+/* identical to box height, or 34px */
+
+
+color: #40455B;
+}
+.text-started-order-about{
+    line-height: 140%;
+/* identical to box height, or 24px */
+
+
+    color: #A0A0A0;
+}
+.user-seller-text{
+    color:var(--color-red);
+    font-weight: 700;
+    
+}
+
+.border-box-note-container{
+    border: 1px solid var(--color-grey);
+    padding: 2rem 1.5rem;
+}
+.note-text-leave{
+    color: #101722;
+    font-weight: 600;
+}
+.box-btn-note-send{
+    width: 20%;
+}
+.btn-send-note{
+    border: 1px solid var(--color-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-pink);
+    padding: 0.45rem;
+    width: 100%;
+    background-color: white;
+}
+.card-text-timing{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 30px */
+
+
+    color: #000000;
+}
+.text-timing-section-text{
+    font-style: normal;
+    font-family: var(--font-futurabook);
+font-weight: 600;
+font-size: 18px;
+line-height: 150%;
+/* or 30px */
+
+
+color: #000000;
+}
+.text-timing-section-text-desc{
+    font-weight: 600;
+font-size: 13px;
+line-height: 150%;
+/* or 22px */
+
+
+color: #9FA0A6;
+font-family: var(--font-futurabook);
+}
+.sperator-div-class{
+    width: 2px;
+    height: 15px;
+    background: #62646A;
+}
+.continue-with-deliver{
+    border:none;
+    outline: none;
+    width: 100%;
+    background-color: #BD3E4A;
+    color: white;
+    padding: 0.5rem 0;
+    text-align: center;
+    font-weight: 500;
+    font-family: 14px;
+}
+.seller-data-about-text{
+    font-weight: 700;
+font-size: 15px;
+line-height: 150%;
+/* or 26px */
+
+
+color: #000000;
+}
+.seller-name-about-text{
+    font-weight: 700;
+font-size: 15px;
+line-height: 150%;
+/* identical to box height, or 26px */
+
+
+color: #641B31;
+}
+.descript-seller-gig-about {
+    font-weight: 400;
+font-size: 15px;
+line-height: 150%;
+/* or 26px */
+
+
+color: #A0A0A0;
+}
+.delivery-section-description-modal{
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+.gig-name-oder-take{
+    width: 90%;
+}
+.text-descr-status-delivery{
+    width: 40%;
+    color:white;
+    background: var(--color-pink);
+    padding: 0.1rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-weight: 12px;
+}
+.text-delivery-op-box-attached-file{
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+.id-rate-offer-pointes{
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-futurabook);
+}

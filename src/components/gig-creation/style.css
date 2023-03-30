@@ -1,0 +1,161 @@
+.text-create-gig{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 150%;
+    color: #000000;
+}
+.card-text-lable-user{
+    font-weight: 700;
+font-size: 19px;
+line-height: 140%;
+/* identical to box height, or 27px */
+
+
+color: #641B31;
+}
+.form-width-section{
+    width: 65%;
+}
+.desc-lable-about-text{
+    font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+/* or 27px */
+width: 60%;
+font-family: var(--font-futurabook);
+color: #A0A0A0
+}
+.inputfile {
+	width: 100px;
+	height: 100px;
+	opacity: 1;
+    cursor: pointer;
+	overflow: hidden;
+	position: absolute;
+}
+.text-area-title-about{
+    width: 100%;
+    border: 1px solid var(--color-grey);
+    resize: none;
+    padding: 1rem;
+}
+.text-area-title-about-select{
+    
+    width: 50%;
+    padding: 0.8rem 0;
+    border:1px solid var(--color-grey);
+    text-align: center;
+    font-size: 17px;
+    line-height: 150%;
+    /* or 27px */
+    font-weight: 700;
+
+    color: #000000;
+    
+}
+.delivery-date-selct-item{
+    text-align: left;
+}
+.delivery-time-sect-about{
+
+    font-size: 16px;
+    line-height: 140%;
+    /* identical to box height, or 27px */
+    font-family: var(--font-futurabook);
+    font-weight: 600;
+    color: #641B31;
+}
+.delivery-date-selct{
+    padding: 0.5rem; 
+    width: 20%;
+    margin-left: 0.5rem;
+    border: 1px solid var(--color-grey);
+    text-align: center;
+    outline: none;
+}
+.text-total-create-gig{
+    font-weight: 700;
+font-size: 22px;
+line-height: 140%;
+/* identical to box height, or 31px */
+
+
+color: #641B31;
+}
+.border-width-box-gig-create{
+    padding: 1rem;
+    background: var(--color-red);
+    color: white;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 140%;
+    /* or 29px */
+
+
+    color: #FFFFFF;
+
+}
+.price-container-create{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-grey);
+}
+.total-price-section{
+    width: 30%;
+    background: #FBFBFB;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--color-grey);
+}
+.text-input-price-active-gig{
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    color: var(--color-red);
+    font-weight: 600;
+    border: none;
+    text-align: center;
+}
+.text-input-price-active-gig::placeholder{
+    color: var(--color-red);
+    font-family: 600;
+    text-align: center;
+}
+.ql-container{
+    height: 350px!important;
+}
+.card-image-upload-gig-create{
+    height: 250px;
+    width: 100%;
+    border: 1xp solid var(--color-grey);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+.d-card-create-image{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid var(--color-grey)
+}
+.card-upload-image-text{
+    font-size: 14px;
+line-height: 150%;
+/* or 21px */
+
+text-align: center;
+
+color: #A0A0A0;
+font-family: var(--font-futurabook);
+}
+.card-upload-image-text-red{
+    font-size: 14px;
+line-height: 150%;
+/* or 21px */
+
+text-align: center;
+
+color: var(--color-red);
+font-family: var(--font-futurabook);
+}

@@ -1,0 +1,27 @@
+.text-area-title-settings{
+    width: 100%;
+    border: 1px solid var(--color-grey);
+    padding:0.75rem 1rem;
+}
+.btn-save-settings-user{
+    width: 30%;
+}
+.btn-send-save-settings{
+    width: 100%;
+    background-color: var(--color-pink);
+    padding: 0.75rem 0;
+    text-align: center;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: var(--font-futurabook);
+    font-weight: 600;
+}
+#lable-settings-about{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 140%;
+    font-family: var(--font-futurabook);
+    color: #000000;
+    padding-bottom: 0.5rem;
+}

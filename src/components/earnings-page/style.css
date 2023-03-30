@@ -1,0 +1,84 @@
+.manage-payout-section{
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+
+    text-decoration-line: underline;
+    padding: 1rem 0;
+    color: #641B31;
+}
+.text-main-earnings{
+    font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 150%;
+/* or 36px */
+
+
+color: #641B31;
+}
+.sec-main-earnings{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+    padding: 0.5rem 0;
+    
+    color: #BD3E4A;
+}
+.form-width-section-earn{
+    width: 80%;
+}
+.withdraw-money-account{
+    background-color: var(--color-pink);
+    padding: 0.8rem;
+    color: white;
+    width: 80%;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+.sep-height-earning{
+    height: 250px;
+    width: 1px;
+    background: var(--color-grey);
+}
+.card-section-create-earning{
+    border: 1px solid var(--color-grey);
+    padding: 3rem 2.5rem;
+}
+.text-earning-money{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 150%;
+    /* or 63px */
+    padding: 0.5rem 0;
+    
+    color: #000000;
+}
+.text-thrid-earning-money{
+    font-size: 16px;
+    line-height: 150%;
+    /* or 27px */
+    padding: 0.5rem 0;
+    
+    color: #A0A0A0;
+}
+.th-body-earning{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+    /* or 22px */
+
+    padding: 2rem 1rem!important;
+    font-family: var(--font-futurabook);
+    color: #000000;
+}
+.td-body-earning{
+    font-family: var(--font-futurabook);
+    font-weight: 700;
+    color: white;
+    font-size: 15px;
+    padding: 1rem!important;
+
+}

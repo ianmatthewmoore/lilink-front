@@ -1,0 +1,53 @@
+.reviews-card-section{
+    border-top: 1px solid var(--color-grey);
+    border-bottom: 1px solid var(--color-grey);
+}
+.card-comp-section{
+    padding: 1.5rem 0;
+}
+.header-reveiw{
+    display: flex;
+}
+.loca-review-card{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    padding: 0.5rem 0;
+    
+    color: #A0A0A0;
+}
+.review-content-card{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 29px */
+    padding: 0.5rem 0;
+    font-family: var(--font-futurabook);
+    color: #40455B;
+}
+.date-last-review-card{
+    font-size: 16px;
+    line-height: 150%;
+    /* or 27px */
+    
+    padding: 0.5rem 0;
+    color: #A0A0A0;
+}
+.title-prod{
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    font-weight: 700;
+
+    /* Primary */
+
+    color: #1D2130;
+}
+.review-rating-style{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    
+    
+    color: #FBA601;
+}

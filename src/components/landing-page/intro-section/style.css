@@ -1,0 +1,46 @@
+.header-text{
+    font-size: 72px;
+    color: white;
+    font-family: var(--font-autt);
+}
+.text-consultant{
+    color: white;
+    font-family: var(--font-dream);
+}
+.position-rec-aboslute{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+}
+.img-posi{
+    width: 100%;
+    height: 100%;
+}
+.section-intro-container{
+    height: 100%;
+    width: 100%;
+}
+.intro-section-part{
+    height: 100vh;
+}
+.section-intro-box{
+    height: 70%;
+    align-items: center;
+    display: flex;
+}
+.btn-section-all{
+    width: 100%;
+}
+.btn-pink-white{
+    width: 50%;
+    padding: 1rem;
+    color: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-pink);
+    text-decoration: none;
+}

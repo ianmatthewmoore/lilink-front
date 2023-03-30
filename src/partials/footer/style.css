@@ -1,0 +1,38 @@
+.footer-text-supp{
+    font-size: 21px;
+    font-family: var(--font-gothambold);
+    color: white;
+}
+
+
+
+.footer-navbar-section{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-navbar-text{
+    color: white;
+    font-size: 16px;
+    padding: 0.65rem 0;
+}
+.footer-section{
+    height: 415px;
+    background: url('../../../public/images/footer.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+.footer-section-box{
+    height: 100%;
+    width: 100%;
+}
+.text-copy-right{
+    font-size: 17px;
+    color: white;
+}
+.sep-text-footer{
+    width: 100%;
+    height: 1px;
+    background-color: white;
+}

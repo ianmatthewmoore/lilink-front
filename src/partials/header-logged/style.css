@@ -1,0 +1,51 @@
+.separtor-section-logged{
+    height: 24px;
+    width: 1.5px;
+    background-color:#641B31;
+}
+
+.list-navbar-text-logged{
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    background-color: white;
+}
+
+.list-nav-items-logged,.list-nav-items-logged:hover{
+    color: #000;
+    margin: 0 0.4rem;
+}
+
+.list-nav-items-logged:hover{
+    color: #000;
+    text-decoration: underline;
+}
+
+
+.logged-header{
+    padding: 1.5rem 0;
+}
+
+.trans-msg{
+    border:1px solid white;
+    padding: 0.2rem 1.5rem ;
+    border-radius: 2px;
+}
+
+.navbar-img{
+    height: auto;
+    width: auto;
+
+}
+.header-title{
+    color: #000;
+    text-decoration: none;
+}
+
+.header-title:hover{
+    color: #000;
+    text-decoration: none;
+}

@@ -1,0 +1,17 @@
+.box-about-us{
+    transform: translateY(-45px);
+    position: relative;
+    z-index: 1;
+}
+.img-background{
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
+}
+.descr-size-about{
+    font-size: 12px;
+}
+.wi-50{
+    width: 80%;
+}

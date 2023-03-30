@@ -1,0 +1,132 @@
+.card-service-gigs-section{
+    padding: 2.5rem 1rem 2.5rem 1rem;
+    border: 1px solid var(--color-grey);
+    margin-top: 2.5rem;
+    border-radius: 9px;
+
+}
+.service-gig-name{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 140%;
+    /* identical to box height, or 38px */
+
+
+    color: #641B31;
+    }
+.service-gig-price{
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 45px */
+    
+    
+    color: #000000;
+}
+.service-gig-desc{
+    color: #858585;
+    font-family: var(--font-futurabook);
+    font-size: 16px;
+    width: 100%;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.whatis-included{
+    font-size: 17px;
+    line-height: 140%;
+    /* identical to box height, or 24px */
+    font-weight: 700;
+
+    color: #BD3E4A;
+}
+.text-delivery-time{
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    color: #000000;
+    
+}
+.continue-section-gig{
+
+    width: 100%;
+}
+.continue-with-offer{
+    border:none;
+    outline: none;
+    width: 100%;
+    background-color: #BD3E4A;
+    color: white;
+    padding: 0.65rem 0;
+    text-align: center;
+    font-weight: 600;
+}
+.box-get-order{
+    padding: 2rem;
+}
+.order-text-box{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 24px */
+
+
+    color: #000000;
+}
+.border-service-box{
+    border-radius: 12px;
+    border:1px solid var(--color-red);
+}
+.service-gig-price-box{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 29px */
+    
+    
+    color: #000000;
+}
+.service-gig-price-box-text{
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 140%;
+    /* identical to box height, or 35px */
+    
+    
+    color: #641B31;
+}
+.desc-user-box-up{
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    pad: 0.5rem;
+}
+.single-order-text{
+    font-weight: 600;
+font-size: 15px;
+line-height: 140%;
+padding: 0.5rem 0;
+/* identical to box height, or 21px */
+
+font-family: var(--font-futurabook);
+color: #000000;
+}
+.text-delivery-box-container{
+    font-weight: 700;
+font-size: 14px;
+line-height: 140%;
+/* identical to box height, or 20px */
+
+
+color: #000000;
+margin-left: 0.4rem;
+}
+.price-last-box-container{
+    background: rgba(185, 184, 184, 0.07);
+border-radius: 11px;
+padding: 1rem;
+margin-top: 7rem;
+}

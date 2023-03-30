@@ -1,12 +1,99 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --color-grey:#C5C1CC;
+  --color-pink:#BD3E4A;
+  --color-red:#641B31;
+  --color-darkred:#2A090F;
+  --color-blue:#101722;
+  --color-darkblue:#023047;
+  --font-autt:auttera;
+  --font-dream:dream;
+  --font-gotham:gotham;
+  --font-gothambold:gothambold;
+  --font-futurabook:futurabook;
+}
+@font-face {
+  font-family: auttera;
+  src: url('../public/font/auttera.ttf');
 }
 
+.text-err-submit{
+  color: rgb(229, 76, 76);
+  font-size: 12px;
+  font-family: var(--font-futurabook);
+}
+
+@font-face {
+  font-family: dream;
+  src: url('../public/font/WhiteDreamPersonalUseOnlyRegular.otf');
+}
+.col-10 {
+    flex: 0 0 auto;
+    width: 20%
+}
+
+@font-face {
+  font-family: gotham;
+  src: url('../public/font/futur.ttf');
+}
+
+@font-face {
+  font-family: gothambold;
+  src: url('../public/font/Futura\ Bold\ font.ttf');
+}
+
+@font-face {
+  font-family: gothammedium;
+  src: url('../public/font/futura\ medium\ bt.ttf');
+}
+
+@font-face {
+  font-family: futurabook;
+  src: url('../public/font/Futura\ Book\ font.ttf');
+}
+
+.custom-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 1600px) {
+    .custom-container {
+        max-width: 1600px;
+    }
+}
+@media (min-width: 1900px) {
+    .custom-container {
+        max-width: 1900px;
+    }
+}
+@media (min-width: 768px) {
+  .custom-container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .custom-container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .custom-container {
+    width: 1350px;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-gotham);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: scroll;
+    overflow-x:hidden ;
+}
+p{
+  margin: 0!important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

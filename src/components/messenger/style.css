@@ -1,0 +1,169 @@
+.box-card-title-image{
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-grey);
+    display: flex;
+    align-items: center;
+}
+.text-image-box-message-name{
+    color: #BD3E4A;
+    font-weight: 700;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+
+}
+.all-conv-message{
+    width: 100%;
+    border: 1px solid var(--color-grey);
+    margin: 2.5rem 0;
+}
+.text-username-own-message{
+color: #000;
+font-weight: 600;
+line-height: 130%;    
+
+
+}
+.text-username-own-message-content{
+color: #000000;
+font-size: 14px;
+}
+.text-username-ext-message{
+    color: var(--color-red);
+    font-weight: 600;
+line-height: 130%;    
+}
+.text-username-ext-message-content{
+    color: #000000;
+    font-size: 14px;
+}
+.text-type-section{
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+    font-weight: 600;
+    text-decoration-line: underline;
+    font-family: var(--font-futurabook);
+    color: #000000;
+}   
+.background-chat-message-box{
+    height: 100%;
+    width: 100%;
+    background: #EDEDEE;
+}
+.box-message{
+    height: 85%;
+
+}
+.pos-text-user-send-icon-svg {
+    position: absolute;
+    top: 30%;
+    right: 7%;
+}
+.input-message-send-text-user{
+    height: 100%;
+    width: 100%;
+    background: white;
+    padding: 1.5rem 3rem 1.5rem 1.5rem;
+    border: 1px solid #E2E2E4;
+    outline: none;
+}
+.text-image-box-message-content{
+    color: #000;
+    width: 250px;
+    font-family: var(--font-futurabook);
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+.delivery-date-selct-item{
+    color: #000;
+    padding: 1rem 0;
+}
+.text-area-mange-describe{
+    border: 1px solid #E3E4E5;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-futurabook);
+}
+.price-offred-op::placeholder{
+    color: #000;
+}
+.price-offred-op{
+    padding: 1rem 0.5rem;
+    color: #000;
+    font-family: var(--font-futurabook);
+}
+.text-area-mange-describe{
+    width: 100%;
+    resize: none;
+}
+.set-payment-offer{
+    font-family: var(--font-futurabook);
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+}
+.define-text{
+    font-family: var(--font-futurabook);
+    font-size: 16px;
+}
+.pink-btn-offer-sec{
+    width: 30%;
+    background-color: var(--color-pink);
+    font-size: 16px;
+    font-family: var(--font-futurabook);
+    color: white;
+    padding: 0.75rem 0;
+    border: none;
+    outline: none;
+}
+.messenger-text-box{
+    border-bottom: 1px solid var(--color-grey);
+    border-left: 1px solid var(--color-grey);
+    padding: 1rem 0.5rem;
+}
+.text-area-mange-describe::placeholder{
+    color: var(--color-grey);
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--font-futurabook);
+}
+.price-offred-op{
+    width: 100%;
+}
+.w-45{
+    width: 45%;
+}
+.width-box-message{
+    width:25% ;
+}
+.box-conx-card{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.box-coibtainer-gig:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.343);
+}
+.img-gig-selection-sec{
+    width: 100%;
+}
+.header-color-red-modal{
+    background-color: var(--color-red);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+.width-lg-box-message{
+    width: 50%;
+    border-left:1px solid var(--color-grey) ;
+    border-right:1px solid var(--color-grey) ;
+}
+.desc-service-gig-sec-msg{
+    font-size: 12px
+}
+.text-desc-info-seller-msg{
+    font-size: 12px
+}

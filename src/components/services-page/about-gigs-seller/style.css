@@ -1,0 +1,87 @@
+.user-service-about-title{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    color: #000000;
+
+}
+.box-width-card-about{
+    width: 85%;
+}
+.user-service-about-desc{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    font-family: var(--font-futurabook);
+    
+    color: #A0A0A0;
+}
+.contact-seller-page-sec,.contact-seller-page-sec:hover{
+    border: 2px solid #BD3E4A;
+    border-radius: 8px;
+    color: #BD3E4A;
+    background: white;
+    width: 40%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.image-round{
+    width: 120px;
+    border-radius: 50%;
+    height: auto;
+}
+.rating-yallow-card{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    /* identical to box height, or 36px */
+
+
+    color: #641B31;
+}
+.rating-grey-card{
+    font-size: 17px;
+    line-height: 150%;
+    /* identical to box height, or 26px */
+    
+    
+    color: var(--color-grey);
+}
+.desc-service-gig-sec{
+    font-family: var(--font-futurabook);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 32px */
+
+
+    color: #A0A0A0;
+}
+.text-desc-info-seller{
+    font-family: var(--font-gotham);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 32px */
+
+
+    color: #000;
+}
+.sep-line-grey{
+    width: 100%;
+    background-color: var(--color-grey);
+    height: 1px;
+}
+.border-section-card-seller{
+    border: 1px solid var(--color-grey);
+    border-radius: 10px;
+    padding: 2.5rem 3.5rem;
+}
+.box-con-card{
+    padding: 0.75rem 0;
+}

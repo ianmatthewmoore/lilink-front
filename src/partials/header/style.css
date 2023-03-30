@@ -1,0 +1,34 @@
+.separtor-section{
+    height: 24px;
+    width: 1.5px;
+    background-color: white;
+}
+
+.list-navbar-text{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 50%;
+}
+
+.list-nav-items{
+    color: white;
+}
+
+.header-section{
+    padding: 2.5rem 0;
+}
+
+.trans-msg{
+    border:1px solid white;
+    padding: 0.2rem 1.5rem ;
+    border-radius: 2px;
+}
+.button-join{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}

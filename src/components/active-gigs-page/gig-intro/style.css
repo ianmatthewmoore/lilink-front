@@ -1,0 +1,24 @@
+.text-gig-intro-section{
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 120%;
+    /* or 38px */
+
+    
+    color: #FFFFFF;
+}
+.text-gig-intro-section-sec{
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    
+    
+    color: #FFFFFF;
+}
+.image-box-container-gigs{
+    height: 300px;
+    width: 100%;
+    background: url('../../../../public/images/gig.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,51 @@
+.loop-bar-seach-header{
+    border-top: 1px solid var(--color-grey);
+    border-bottom: 1px solid var(--color-grey);
+    padding: 1.5rem;
+}
+.loop-search-bar{
+    position: relative;
+    width: 35%;
+}
+.input-search-loop{
+    background: #FCFCFC;
+    border: 1px solid rgba(100, 27, 49, 0.35);
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.input-search-loop::placeholder{
+    color: var(--color-grey);
+    
+}
+.pos-image-loop{
+    position: absolute;
+    right: 3%;
+    top: 20%;
+}
+.box-jobs-search{
+    width: 60%;
+}
+.box-search{
+    width: 100%;
+}
+.navbar-seach-job{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+.list-heading-navbar{
+    padding: 0;
+
+}
+.heading-four{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 25px */
+
+
+    color: #40455B;
+}

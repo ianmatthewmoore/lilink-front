@@ -1,0 +1,15 @@
+.text-about-gigs-creation{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 25px */
+    color: #717171;
+
+}
+.text-length-width-about{
+    width: 85%;
+}
+.gigs-about-section{
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-grey);
+}
