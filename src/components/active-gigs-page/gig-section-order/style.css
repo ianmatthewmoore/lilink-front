@@ -75,6 +75,30 @@ align-items: center;
     padding: 3px 1.75rem;
     font-weight: 600;
 }
+.text-desc-gig-active-order-des-card-redDark{
+    background: rgb(169, 50, 50);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 3px 1.75rem;
+    font-weight: 600;
+}
+.text-desc-gig-active-order-des-card-green{
+    background: rgb(104, 200, 63);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 3px 1.75rem;
+    font-weight: 600;
+}
+.text-desc-gig-active-order-des-card-pink{
+    background: var(--color-pink);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 3px 1.75rem;
+    font-weight: 600;
+}
 .text-desc-gig-active-order-des-red{
     color: var(--color-red);
     font-weight: 600;

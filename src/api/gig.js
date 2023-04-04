@@ -34,7 +34,16 @@ export async function deleteGigCurr (data){
 
     return res.data
 }
+export async function getGigByByName (data){
 
+    const res = await instance({
+        // url of the api endpoint (can be changed)
+        url: "/gigs/getGigByName/"+data,
+        method: "get",
+      })
+
+    return res.data
+}
 export async function getGigById (data){
 
     const res = await instance({
@@ -46,7 +55,16 @@ export async function getGigById (data){
 
     return res.data
 }
+export async function getGigByAll (){
 
+    const res = await instance({
+        // url of the api endpoint (can be changed)
+        url: "/gigs/get-all-gigs/",
+        method: "get",
+      })
+
+    return res.data
+}
 export async function modifyGigById (data){
 
     const res = await instance({

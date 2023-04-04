@@ -24,6 +24,10 @@ import { Provider, useDispatch } from 'react-redux'
 import { fetchUserById } from './redux/user';
 import UpdateGigPage from './pages/update-gig/update-gig';
 import { socket } from './utils/socket';
+import HomePage from './pages/home-comp/home-comp';
+import Toast from './components/toster/toast';
+import SearchPage from './pages/home-seach/home-search';
+import { Stripe } from './components/pay/stripeContainer';
 
 const queryClient = new QueryClient()
 
@@ -33,20 +37,23 @@ function App() {
 
   useEffect(()=>{
     dispatch(fetchUserById())
+    socket.on('connect', ()=>{
+      if(localStorage.getItem('token'))
+        socket.emit('new user',localStorage.getItem('token'))
+        socket.on('online user ',(data)=>{
+          console.log(data);
+        })
+    });
   },[])
-  socket.on('connect', ()=>{
-    if(localStorage.getItem('token'))
-      socket.emit('new user',localStorage.getItem('token'))
-      socket.on('online user ',(data)=>{
-        console.log(data);
-      })
-  });
+  
 
   return (
       <QueryClientProvider client={queryClient}>
+        <Toast></Toast>
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<LandingPage />}/>
+
               <Route path='/profile/:id' element={<Profile />}/>
               <Route path='/service/:id' element={<Service />}/>
               <Route path='/gig-active' element={<GigOrders />}/>
@@ -56,7 +63,12 @@ function App() {
               <Route path='/order/:id' element={<GigNoteUser />}/>
               <Route path='/earning' element={<EarningPage />}/>
               <Route path='/myGig' element={<AllMyGig />}/>
+              <Route path='/myGig' element={<AllMyGig />}/>
+              <Route path='/search/:id' element={<SearchPage />}/>
+              <Route path='/message' element={<MessagePage />}/>
               <Route path='/message/:id' element={<MessagePage />}/>
+              <Route path='/home' element={<HomePage />}/>
+              <Route path='/stripe' element={<Stripe />}/>
             </Routes>
           </BrowserRouter>
       </QueryClientProvider>

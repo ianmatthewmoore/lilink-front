@@ -4,9 +4,7 @@ import './style.css';
 
 const ReviewsCard = (props) =>{
 
-    useEffect(()=>{
-        console.log(props)
-    },[])
+   
 
     return(
         <div className="reviews-card-section">
@@ -14,7 +12,7 @@ const ReviewsCard = (props) =>{
                 <div className="card-comp-section">
                     <div className="header-reveiw">
                         <div className="me-3">
-                            <img src={process.env.PUBLIC_URL + "/images/rev.png"} />
+                            <img src={"http://localhost:3005/public/images/"+props.review?.consultant_id?.photo} style={{height:"48px",width:"48px",borderRadius:"50%"}}/>
                         </div>
                         <div className="">
                             <div className="d-flex align-items-center">

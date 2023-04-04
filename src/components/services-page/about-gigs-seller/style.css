@@ -85,3 +85,8 @@
 .box-con-card{
     padding: 0.75rem 0;
 }
+.img-round{
+    width: 142px;
+    height: 142px;
+    border-radius: 50%;
+}

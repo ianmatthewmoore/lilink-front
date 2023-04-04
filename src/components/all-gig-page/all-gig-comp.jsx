@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteGigCurr } from "../../api/gig";
+import { fetchUserById } from "../../redux/user";
 import './style.css';
 
 const AllGigComp = () =>{
@@ -11,6 +12,7 @@ const AllGigComp = () =>{
     const [currUser,setcurrUser] = useState([])
     const [id,setid] = useState(null)
 
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         if(user)
@@ -24,6 +26,7 @@ const AllGigComp = () =>{
         queryFn: async () => {
             const user = await deleteGigCurr(id);
             setcurrUser(current => current.filter(x => id != x._id))
+            dispatch(fetchUserById())
             return user;
           
         },
@@ -32,7 +35,6 @@ const AllGigComp = () =>{
         refetchOnWindowFocus: true,   
         retry:false,
             
-
       });
     
     function deletGig(id){
@@ -51,18 +53,21 @@ const AllGigComp = () =>{
                 </div>
             <div className="d-flex justify-content-center my-3">
                         <div className="form-width-section-earn">
-                                <div className="red-box-edit-content">
+                            <div className="">
+                                <div className="red-box-edit-content d-flex justify-content-between align-items-center">
                                     Active Gigs
+                                <Link to='/gig-creation' className="gig-create-select-btn">Create gig</Link>
                                 </div>
+                            </div>
                             {currUser?.map(x=>{
                                 return(
                                 <div className="d-flex justify-content-between align-items-center box-about-edit-gig-sec" >
                                 <div className="ward-tex-edit">
                                     <div className="d-flex align-items-center">
                                         <div className="me-2">
-                                            <img src={process.env.PUBLIC_URL+"/images/gig-title.png"} style={{height:"56px",width:"75px"}}/>
+                                            <img src={"http://localhost:3005/public/images/"+x.images[0]} style={{height:"56px",width:"75px"}}/>
                                         </div>
-                                        <p className="gig-text-edit-form">I will do {x.title}</p>
+                                        <Link to={"/service/"+x._id} className="gig-text-edit-form">I will do {x.title}</Link>
                                     </div>
                                 </div>
                                 <div className="ward-tex-edit">

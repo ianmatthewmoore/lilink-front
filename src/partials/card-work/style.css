@@ -9,6 +9,7 @@
     color: black;
     font-size: 14px;
     padding: 0.4rem;
+    height: 60px;
 }
 .rating-yallow{
     font-family: var(--font-gotham);
@@ -28,7 +29,13 @@
     color:#1D2130;
     padding: 0.5rem 0;
     font-size: 14px;
-    height: 62px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: pre-wrap;
+    height: 55px;
+
 }
 .starting-price{
     font-size: 10px;

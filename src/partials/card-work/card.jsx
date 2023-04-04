@@ -21,26 +21,28 @@ const CardWork = (props) =>{
         <div className="card-user p-0">
             <Link to={"/service/"+props.card?._id}>
                 <div className="card-header p-0">
-                    <img src={process.env.PUBLIC_URL+'/images/gig-title.png'} alt="ds" style={{width:"100%"}}/>
+                <img src={"http://localhost:3005/public/images/"+props.card?.images[0]} alt="username" style={{width:"100%",height:"160px"}}/>
                 </div>
                 <div className="card-body p-0">
                     <div className="py-2  px-2">
-                        <div className="d-flex align-items-center " >
-                            <div>
-                                <img src={process.env.PUBLIC_URL+'/images/username.png'} alt="username" />
+                        <div className="d-flex  justify-content-between align-items-center" >
+                            <div className="d-flex align-items-center">
+                                <div>
+                                    <img src={"http://localhost:3005/public/images/"+props.card?.consultant_id?.photo} alt="username" style={{width:"48px",height:"48px"}}/>
+                                </div>
+                                <p className="username-text-card"> {props.card?.consultant_id?.firstName + " " + props.card?.consultant_id?.lastName} </p>
                             </div>
                             <div className="d-flex align-items-center">
 
-                                <p className="username-text-card"> {props.card?.consultant_id?.firstName + " " + props.card?.consultant_id?.lastName} </p>
                                 <div className="">
 
                                     <img src={process.env.PUBLIC_URL+'/images/star.png'} alt="username" />
                                 </div>
                                 <p className="rating-yallow">{
-                                reviewsPerGig / props.card.reveiws.length
+                                reviewsPerGig / props.card?.reveiws?.length
                                 }</p>
                                 <p className="rating-grey">({
-                                props.card.reveiws.length
+                                props.card?.reveiws?.length
                                 } )</p>
                             </div>
                         </div>

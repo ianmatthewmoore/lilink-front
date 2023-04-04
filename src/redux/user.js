@@ -21,7 +21,9 @@ export const userDataSlice= createSlice({
     name:"currentUser",
     initialState,
     reducers:{
-    
+        loggout:(state,payload)=>{
+            state.isConnected=true
+        }
     },
     extraReducers:(builder) =>{
         builder.addCase(fetchUserById.fulfilled,(state,action)=>{
@@ -43,5 +45,6 @@ export const userDataSlice= createSlice({
 })
 
 
+export const {loggout} = userDataSlice.actions;
 
 export default userDataSlice.reducer;

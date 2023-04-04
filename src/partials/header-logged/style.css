@@ -49,3 +49,9 @@
     color: #000;
     text-decoration: none;
 }
+.text-nootif-time{
+
+    font-size:12px;
+    font-weight:"600";
+    color:var(--color-grey)
+}

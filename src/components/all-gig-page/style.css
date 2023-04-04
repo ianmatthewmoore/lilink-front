@@ -52,3 +52,16 @@
 
     color: #FFFFFF;
 }
+.gig-create-select-btn,.gig-create-select-btn:hover{
+    padding: 0.4rem 2rem;
+    background: white;
+    border: none;
+    color: var(--color-red);
+}
+.gig-text-edit-form{
+    color:#000
+}
+.gig-text-edit-form:hover{
+    text-decoration: underline!important;
+    color: #000;
+}

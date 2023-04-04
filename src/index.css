@@ -59,12 +59,12 @@
 }
 @media (min-width: 1600px) {
     .custom-container {
-        max-width: 1600px;
+        max-width: 90%;
     }
 }
 @media (min-width: 1900px) {
     .custom-container {
-        max-width: 1900px;
+      max-width: 90%;
     }
 }
 @media (min-width: 768px) {
@@ -79,7 +79,7 @@
 }
 @media (min-width: 1200px) {
   .custom-container {
-    width: 1350px;
+    width: 90%;
   }
 }
 

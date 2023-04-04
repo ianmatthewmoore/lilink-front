@@ -16,6 +16,7 @@ import {
   } from 'mdb-react-ui-kit';
 import { Rating } from "@mui/material";
 import { feedbackCreate } from "../../api/feedback";
+import { socket } from "../../utils/socket";
 const GigNoteSection = () =>{
     const [toggleOneModal, setToggleOneModal] = useState(false);
     const [toggleTwoModal, setToggleTwoModal] = useState(false);
@@ -83,9 +84,20 @@ const GigNoteSection = () =>{
         sendData.mutate(newData, {
             onSuccess: async (dataUser) => {
                 setToggleOneModal(!toggleOneModal);
+                let datas = {
+                    idOwner:order?.consultantId._id,
+                    receivers:order?.customerId._id,
+                    content:order?.consultantId.firstName+ " " +order?.consultantId.lastName+" Just Deliver his project !",
+                    link:order?.reference,
+                    type:"order",
+                    send_date:Date.now(),
+                }
+                socket.emit('new notif',datas)
                 setTimeout(() => {
                   setToggleTwoModal(!toggleTwoModal);
+                  window.location.href="/order/"+id
                 }, 500);
+
             },
             onError: (err) => {
             },
@@ -99,13 +111,22 @@ const GigNoteSection = () =>{
             communication_rating:value,
             service_rating:valueFeed,
             message:feedback,
-            
+            order_ref:id,
             gig_id:values
         }
 
         sendDataFeed.mutate(newData, {
             onSuccess: async (dataUser) => {
-                console.log(dataUser)
+                let datas = {
+                    idOwner:order?.customerId._id,
+                    receivers:order?.consultantId._id,
+                    content:order?.customerId.firstName+ " " +order?.customerId.lastName+" Just left a feedback ! Check it out.",
+                    link:order?.reference,
+                    type:"order",
+                    send_date:Date.now(),
+                }
+                socket.emit('new notif',datas)
+                window.location.href="/order/"+id
             },
             onError: (err) => {
             },
@@ -120,6 +141,28 @@ const GigNoteSection = () =>{
         rejectDataDelivery.mutate(id, {
             onSuccess: async (dataUser) => {
                 setToggleOneModal(!toggleOneModal);
+                if(user.type=="CONSULTANT"){
+
+                    let datas = {
+                        idOwner:order?.consultantId._id,
+                        receivers:order?.customerId._id,
+                        content:order?.customerId.firstName+ " " +order?.customerId.lastName+" Refused your delivery. Contact him for more information!",
+                        link:order?.reference,
+                        type:"order",
+                        send_date:Date.now(),
+                    }
+                    socket.emit('new notif',datas)
+                }else{
+                    let datas = {
+                        idOwner:order?.customerId._id,
+                        receivers:order?.consultantId._id,
+                        content:order?.customerId.firstName+ " " +order?.customerId.lastName+" Refused your delivery. Contact him for more information!",
+                        link:order?.reference,
+                        type:"order",
+                        send_date:Date.now(),
+                    }
+                    socket.emit('new notif',datas)
+                }
                 setTimeout(() => {
                   setToggleTwoModal(!toggleTwoModal);
                 }, 500);
@@ -130,9 +173,18 @@ const GigNoteSection = () =>{
     }
 
     function acceptDeliveryByid(id){
-        accpetDataDelivery.mutate(id, {
+        accpetDataDelivery.mutate({id,ref:order?.reference}, {
             onSuccess: async (dataUser) => {
                 setToggleOneModal(!toggleOneModal);
+                let datas = {
+                    idOwner:order?.customerId._id,
+                    receivers:order?.consultantId._id,
+                    content:user.user?.firstName+ " " +user.user?.lastName+" Accepted your delivery. Contact him for more information!",
+                    link:order?.reference,
+                    type:"order",
+                    send_date:Date.now(),
+                }
+                socket.emit('new notif',datas)
                 setTimeout(() => {
                   setToggleTwoModal(!toggleTwoModal);
                 }, 500);
@@ -195,8 +247,9 @@ const GigNoteSection = () =>{
                         </div>
                     </div> 
                 :
-                <>   <>
-                {user.type=="CUSTOMER" && user.user?.custumer_review?.find( x=> x.gig_id === order?.gigs?._id ) ? 
+                <>   
+                <>
+                {user.type=="CUSTOMER" && user.user?.custumer_review?.find( x=> x.order_ref === id ) ? 
                    <div className="border-box-note-container mb-4">
                <div className="py-3"> 
                    <p className="note-text-leave py-2" style={{fontSize:"26px"}}>This is order is completed ! </p>
@@ -206,7 +259,9 @@ const GigNoteSection = () =>{
                    </div>
                        
                    </div>
-                   :  <div className="border-box-note-container mb-4">
+                   :  
+                   <>
+                   {user.type=="CUSTOMER" && <div className="border-box-note-container mb-4">
                    <div className="py-3"> 
                        <p className="note-text-leave py-2" style={{fontSize:"26px"}}>Rate your clients :</p>
                    </div>
@@ -249,7 +304,70 @@ const GigNoteSection = () =>{
                                    </div>
                                </div>
                            </div>
-                       </div>
+                       </div>}
+                   </>
+                   
+               }
+               {user.type=="CONSULTANT" && user.user?.custumer_review?.find( x=> x.order_ref === id ) ? 
+                   <div className="border-box-note-container mb-4">
+               <div className="py-3"> 
+                   <p className="note-text-leave py-2" style={{fontSize:"26px"}}>This is order is completed ! </p>
+               </div>
+                   <div className="alert alert-success">
+                       <p>Congratulation ! this offer was successfully completed and reviewed </p>
+                   </div>
+                       
+                   </div>
+                   :
+                   <>
+                     {user.type=="CONSULTANT" &&  <div className="border-box-note-container mb-4">
+                    
+                    <div className="py-3"> 
+                        <p className="note-text-leave py-2" style={{fontSize:"26px"}}>Rate your clients :</p>
+                    </div>
+    
+                            <div style={{width:"100%"}}>
+                            <div className="pb-1">
+                                <p className="id-rate-offer-pointes">Communication :</p>
+    
+                                <Rating
+                                    name="simple-controlled"
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                />
+                            </div>
+                                
+                                <div className="py-3">
+                                <p className="id-rate-offer-pointes">Service as described :</p>
+    
+                                    <Rating
+                                        name="simple-controlled"
+                                        value={valueFeed}
+                                        onChange={(event, newValue) => {
+                                            setValueFeed(newValue);
+                                        }}
+                                    />
+                                </div>
+                                
+    
+                                <div className="py-2">
+                                    <p className="id-rate-offer-pointes">Say something to your client :</p>
+                                    <textarea className="text-area-title-about" placeholder="Gig Title..." cols="30" rows="8" onChange={e=> setFeedback(e.target.value)}></textarea>
+                                </div>
+                                <div className="py-2">
+                                    <div className="d-flex justify-content-end">
+                                        <div style={{width:"30%"}}>
+                                            <button className="continue-with-deliver" onClick={e=> sendFeed(order?.gigs?._id)}>Send your feedback</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+}
+                   </>
+                    
                }
                </>
                 </>
@@ -262,7 +380,81 @@ const GigNoteSection = () =>{
                 </div>
                 <div className="col-4">
                     <div className="border-box-container-no-red mt-5 mb-1">
-                        <div className="pb-3">
+                        
+                        <div className="pt-4 pb-3">
+
+                                    {user?.type == "CONSULTANT" ? 
+                                    <>
+                                        {order?.deliveries && order?.deliveries?.status === "DELIVERED" && <p className="continue-with-deliver"> Already Delivered</p>} 
+                                        {order?.deliveries && order?.deliveries?.status === "ACCEPTED" && <div className="text-center alert  alert-success" style={{fontWeight:"700"}}>Order Completed</div> }
+                                        {order?.deliveries && order?.deliveries?.status === "REFUSED" && <div className="text-center alert  alert-warning" style={{fontWeight:"700"}}>Order Rejected</div> }
+                                        {order?.deliveries && order?.deliveries?.status === "PENDING" && <>
+                                        <div className="pb-3">
+                            <p className="card-text-timing">Time left to next delivery :</p>
+                                        </div>
+                        <div className="d-flex justify-content-between align-items-baseline px-3">
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{days}</p>
+                                <p className="text-timing-section-text-desc">Days</p>
+                            </div>
+                            <div className="sperator-div-class"></div>  
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{hours}</p>
+                                <p className="text-timing-section-text-desc">Hours</p>
+                            </div>
+                            <div className="sperator-div-class"></div>
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{minutes}</p>
+                                <p className="text-timing-section-text-desc">Minutes</p>
+                            </div>
+                            <div className="sperator-div-class"></div>
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{seconds}</p>
+                                <p className="text-timing-section-text-desc">Seconds</p>
+                            </div>
+                        </div><button className="continue-with-deliver" onClick={() => setToggleOneModal(!toggleOneModal)}>Deliver Now</button> 
+                                        </>}
+                                        {!order?.deliveries && <>
+                                        <div className="pb-3">
+                                            <p className="card-text-timing">Time left to next delivery :</p>
+                                                        </div>
+                                        <div className="d-flex justify-content-between align-items-baseline px-3">
+                                            <div className="text-center">
+                                                <p className="text-timing-section-text">{days}</p>
+                                                <p className="text-timing-section-text-desc">Days</p>
+                                            </div>
+                                            <div className="sperator-div-class"></div>  
+                                            <div className="text-center">
+                                                <p className="text-timing-section-text">{hours}</p>
+                                                <p className="text-timing-section-text-desc">Hours</p>
+                                            </div>
+                                            <div className="sperator-div-class"></div>
+                                            <div className="text-center">
+                                                <p className="text-timing-section-text">{minutes}</p>
+                                                <p className="text-timing-section-text-desc">Minutes</p>
+                                            </div>
+                                            <div className="sperator-div-class"></div>
+                                            <div className="text-center">
+                                                <p className="text-timing-section-text">{seconds}</p>
+                                                <p className="text-timing-section-text-desc">Seconds</p>
+                                            </div>
+                                        </div><button className="continue-with-deliver" onClick={() => setToggleOneModal(!toggleOneModal)}>Deliver Now</button> 
+                                        </>}
+                                    </>
+                                     : 
+                                     <>
+                                        {
+                                        order?.deliveries && order?.deliveries?.status === "DELIVERED" && <button className="continue-with-deliver" onClick={() => {
+                                            
+                                            setTimeout(() => {
+                                                setToggleOneModal2(!toggleOneModal2)
+                                            },300)
+                                                
+                                        }}>Confirm Delivery</button> 
+                                        }
+
+                                     {order?.deliveries && order?.deliveries?.status === "PENDING" && <>
+                                     <div className="pb-3">
                             <p className="card-text-timing">Time left to next delivery :</p>
                         </div>
                         <div className="d-flex justify-content-between align-items-baseline px-3">
@@ -285,23 +477,41 @@ const GigNoteSection = () =>{
                                 <p className="text-timing-section-text">{seconds}</p>
                                 <p className="text-timing-section-text-desc">Seconds</p>
                             </div>
+                            </div>
+                            <button className="continue-with-deliver" onClick={() => setToggleOneModal(!toggleOneModal)}>Not yet Delivered</button>
+                                     </> 
+                                      }
+                                      {!order?.deliveries && <>
+                                     <div className="pb-3">
+                            <p className="card-text-timing">Time left to next delivery :</p>
                         </div>
-                        <div className="pt-4 pb-3">
+                        <div className="d-flex justify-content-between align-items-baseline px-3">
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{days}</p>
+                                <p className="text-timing-section-text-desc">Days</p>
+                            </div>
+                            <div className="sperator-div-class"></div>  
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{hours}</p>
+                                <p className="text-timing-section-text-desc">Hours</p>
+                            </div>
+                            <div className="sperator-div-class"></div>
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{minutes}</p>
+                                <p className="text-timing-section-text-desc">Minutes</p>
+                            </div>
+                            <div className="sperator-div-class"></div>
+                            <div className="text-center">
+                                <p className="text-timing-section-text">{seconds}</p>
+                                <p className="text-timing-section-text-desc">Seconds</p>
+                            </div>
+                            </div>
+                            <button className="continue-with-deliver" onClick={() => setToggleOneModal(!toggleOneModal)}>Not yet Delivered</button>
+                                     </> 
+                                      }
 
-                                    {user?.type == "CONSULTANT" ? 
-                                    <>
-                                        {order?.deliveries && order?.deliveries?.status === "DELIVERED" ? <p className="continue-with-deliver"> Already Delivered</p> : <button className="continue-with-deliver" onClick={() => setToggleOneModal(!toggleOneModal)}>Deliver Now</button> }
-                                        
-                                    </>
-                                     : 
-                                    <>
-                                        {order?.deliveries && order?.deliveries?.status === "DELIVERED" ?  <button className="continue-with-deliver" onClick={() => {
-                                            
-                                            setTimeout(() => {
-                                                setToggleOneModal2(!toggleOneModal2)
-                                            },300)
-                                                
-                                        }}>Confirm Delivery</button> : <p className="continue-with-deliver"> Not yet Delivered</p>  }
+                                        {order?.deliveries && order?.deliveries?.status === "ACCEPTED" && <div className="text-center alert  alert-success " style={{fontWeight:"700"}}>Order Completed</div> }
+                                        {order?.deliveries && order?.deliveries?.status === "REFUSED" && <div className="text-center alert  alert-warning" style={{fontWeight:"700"}}>Order Rejected</div> }
                                      </>
 
                                     }

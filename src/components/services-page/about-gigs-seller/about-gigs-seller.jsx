@@ -44,7 +44,7 @@ const AboutGigSellerBid=(props) =>{
             <div className="box-width-card-about">
                 <div className="d-flex"   style={{width:'100%'}}>
                     <div className="me-3    ">
-                        <img src={process.env.PUBLIC_URL+"/images/sellertag.png"} className="img-round"/>
+                        <img src={"http://localhost:3005/public/images/"+user?.photo} className="img-round"/>
                     </div>
                     <div className=""   style={{width:'100%'}}>
                         <div className=""  style={{width:'100%'}}>
@@ -61,7 +61,7 @@ const AboutGigSellerBid=(props) =>{
                                     <p className="rating-grey-card">({nbReviews}) Reviews</p>
                                     </div>
                                     <div className="contact-seller-page">
-                                        <Link to="/" className="contact-seller-page-sec">
+                                        <Link to={"/message/"+user?._id} className="contact-seller-page-sec">
                                             Contact Me
                                         </Link>
                                     </div>

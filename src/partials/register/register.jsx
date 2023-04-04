@@ -39,7 +39,6 @@ const Register = () =>{
         }
             registerMutation.mutate(newObj, {
                 onSuccess: async (dataUser) => {
-                    localStorage.setItem("token",dataUser)
                     setIsErr(false)
                 },
                 onError: (err) => {

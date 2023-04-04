@@ -18,6 +18,7 @@ const ServiceCard = (props) =>{
         }
     
         setState({ ...state, [anchor]: open });
+        window.location.href="/stripe"
       };
     
       const list = (anchor) => (
@@ -36,13 +37,13 @@ const ServiceCard = (props) =>{
                 <Divider />
                 <div className="border-service-box pb-5 px-3">
                     <div className="d-flex justify-content-between py-3">
-                        <p className="service-gig-price-box">{props.gig?.service}</p>
+                        <p className="service-gig-price-box">{props.gig?.descriptionService}</p>
 
                         <p className="service-gig-price-box-text">US${props.gig?.price}</p>
 
                     </div>
                     <div className="pt-2 pb-5">
-                        <p className="service-gig-desc">LoremLoremLoremL oremLor emLoremLoremL oremLoremLoremLoremL oremLoremL  oremLoremLoremLoremLo remLoremLoremLoremLoremL oremLorem LoremLoremLorem</p>
+                        <p className="service-gig-desc">{props.gig?.service} </p>
                     </div>
                 </div>
                 <div className="price-last-box-container">
@@ -58,7 +59,7 @@ const ServiceCard = (props) =>{
 
                 </div>
                 <div className="continue-section-gig pt-2 mt-5">
-                    <button className="continue-with-offer" onClick={toggleDrawer("right", true)}>Continue</button>
+                    <button className="continue-with-offer" onClick={e =>toggleDrawer("right", true)}>Continue</button>
                 </div>
             </div>
         </Box>
@@ -68,13 +69,13 @@ const ServiceCard = (props) =>{
     return(
         <div className="card-service-gigs-section">
             <div className="pb-2">
-                <p className="service-gig-name">{props.gig?.service}</p>
+                <p className="service-gig-name">{props.gig?.descriptionService}</p>
             </div>
             <div className="py-2">
                 <p className="service-gig-price">US${props.gig?.price}</p>
             </div>
             <div className="py-2">
-                <p className="service-gig-desc">LoremLoremLoremL oremLor emLoremLoremL oremLoremLoremLoremL oremLoremL  oremLoremLoremLoremLo remLoremLoremLoremLoremL oremLorem LoremLoremLorem</p>
+                <p className="service-gig-desc">{props.gig?.service} </p>
             </div>
             <div className="py-2">
                 <div className="d-flex align-items-center">

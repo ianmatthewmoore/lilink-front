@@ -14,13 +14,31 @@ let schema = yup
 
   title: yup.string().required().min(3).max(200),
   price: yup.string().required().min(1),
-  service: yup.string().required().min(3).max(16),
+  service: yup.string().required().min(3).max(200),
   descriptionService: yup.string().required().min(3).max(200),
 
 
 })
 .required();
-
+const ARRAY_JOB =[ "Marketing consulting",
+"Operations consulting",
+ "Financial consulting",
+"HR consulting",
+"Compliance consulting",
+"IT/ Technology consulting",
+"Legal consultant ",
+"Social media consultant",
+"Sustainability consultant ",
+"Sales consultant ",
+"Wellness/Fitness consultant",
+ "Growth Marketing consultant",
+ "Career coaching consultancy ",
+ "PR consultancy",
+ "SEO consulting",
+ "Leadership consulting",
+ "Product development consulting",
+ "Design consultant",
+ "Strategy consulting"]
 const CreateGig = () =>{
 
     const [value, setValue] = useState('');
@@ -28,9 +46,10 @@ const CreateGig = () =>{
     const [arrayImage,setArryImage] = useState([]);
     const [cate,setCate]=useState('')
     const [deli,setDeli]=useState('')
+    const [success,setSuccess]=useState(false)
     const [err,seterr]=useState(false)
 
-
+ 
     function uploadGigOneImg(e){
 
         setImageGig(old => [...old, URL.createObjectURL(e.target.files[0])]);
@@ -74,7 +93,11 @@ const CreateGig = () =>{
             
             loginMutation.mutate(newObj, {
                 onSuccess: async (dataUser) => {
-                    console.log(dataUser)
+                    setSuccess(true)
+                    setTimeout(()=>{
+                        window.location.href="/myGig"
+                        setSuccess(false)
+                    },3000)
                 },
                 onError: (err) => {
                 },
@@ -129,10 +152,13 @@ const CreateGig = () =>{
                         <div className="py-2">
                             <select className="text-area-title-about-select" onChange={e => setCate(e.target.value)}>
                                 <option className="list-navbar-section">Select a category</option>
-                                <option className="list-navbar-section">Hello</option>
-                                <option className="list-navbar-section">Hello</option>
-                                <option className="list-navbar-section">Hello</option>
-                                <option className="list-navbar-section">Hello</option>
+                                {ARRAY_JOB.map(x=>{
+                                    return(
+                                        <option className="list-navbar-section">{x}</option>
+                                    )
+                                
+                                })}
+    
                             </select>
                         </div>
                     </div>
@@ -145,6 +171,25 @@ const CreateGig = () =>{
                             </div>
                             <div className="">
                                 <input className="text-area-title-about" placeholder="Gig Title..." {...register("descriptionService")} />
+                                {errors?.descriptionService?.type ===
+                                              "required" && (
+                                              <p className="text-err-submit">
+                                                This field is required
+                                              </p>
+                                            )}
+                                            {errors?.descriptionService?.type ===
+                                              "min" && (
+                                              <p className="text-err-submit">
+                                                Service maximum length is 
+                                                3
+                                              </p>
+                                            )}
+                                            {errors?.descriptionService?.type ===
+                                              "max" && (
+                                              <p className="text-err-submit">
+                                                Service maximum length is 16
+                                              </p>
+                                            )}
                                 <textarea className="text-area-title-about" placeholder="Gig Title..." cols="30" rows="5" {...register("service")}></textarea>
                                 {errors?.service?.type ===
                                               "required" && (
@@ -250,6 +295,9 @@ const CreateGig = () =>{
                            
                         </div>
                     </div>
+                    {success && <div className="alert alert-success">
+                        <p>Your gig was Successfully created ! Congratulation.</p>
+                    </div>}
                     <div className="d-flex justify-content-end my-4" style={{width:"100%"}}>
                     <div style={{width:"30%"}}>
                         <button className="btn-auth-send" type="submit">Send</button>

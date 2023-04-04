@@ -40,7 +40,7 @@ async function acceptDelivery (data){
 
     const res = await instance({
         // url of the api endpoint (can be changed)
-        url: "proposal/accept-delivery/"+data,
+        url: "proposal/accept-delivery/"+data.id+"/"+data.ref,
         method: "put"
       })
 
@@ -51,7 +51,7 @@ async function rejectDelivery (data){
 
     const res = await instance({
         // url of the api endpoint (can be changed)
-        url: "proposal/reject-delivery/"+data,
+        url: "proposal/reject-delivery/"+data.id+"/"+data.ref,
         method: "put"
       })
 

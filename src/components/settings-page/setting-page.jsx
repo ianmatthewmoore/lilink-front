@@ -7,6 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
+import { uploadGigImage } from "../../api/gig";
+import { useDispatch } from "react-redux";
+import { fetchUserById } from "../../redux/user";
 let schema = yup
 .object()
 .shape({
@@ -24,7 +27,9 @@ const SettingAccount = () =>{
     const [country,setcountry] = useState(null)
     const [langOne,setlangOne] = useState(null)
     const [langSec,setlangSec] = useState(null)
-
+    const [imageGig,setImageGig] = useState(null)
+    const [arrayImage,setArryImage] = useState(null)
+    const [modif,setModifySucess] = useState(false)
       const {
           register,
           handleSubmit,
@@ -38,6 +43,7 @@ const SettingAccount = () =>{
         queryFn: async () => {
             const user = await getUserById();
             setcurrUser(user)
+            setImageGig(user.photo)
             return user;
           
         },
@@ -45,22 +51,48 @@ const SettingAccount = () =>{
       });
 
     const updateUserMutation = useMutation(updateData);
+    const dispatch = useDispatch()
 
     async function modifyData(data){
         let newObj={
             ...data,
             country,
+            photo:imageGig,
             language:[langOne,langSec]
         }
         updateUserMutation.mutate(newObj, {
             onSuccess: async (dataUser) => {
-              console.log(dataUser)
+                dispatch(fetchUserById())
+                setModifySucess(true)
+                setTimeout(()=>{
+                    setModifySucess(false)
+
+                },(4000))
             },
             onError: (err) => {
             },
         });
 
     }
+    const addMutation = useMutation(uploadGigImage);
+
+    function uploadGigOneImg(e){
+
+        console.log(e.target.files[0])
+
+        let formData = new FormData();
+        
+        formData.append('file',e.target.files[0])
+
+        addMutation.mutate(formData, {
+            onSuccess: async (dataUser) => {
+                setImageGig(dataUser.fileName);
+                
+            },
+            onError: (err) => {
+            },
+        });
+    } 
 
     return(
         <div className="create-gig-prom mb-5">
@@ -69,6 +101,17 @@ const SettingAccount = () =>{
                 </div>
                 <div className="d-flex justify-content-center my-3">
                         <div className="form-width-section">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="">
+                                        <img src={"http://localhost:3005/public/images/" + imageGig } alt="img" style={{width:"145px",height:"145px",borderRadius:"50%"}} />
+                                        
+                                    </div>
+                                    <div className="">
+                                        <input type="file" className="" onChange={e => uploadGigOneImg(e)}/>
+                                    </div>
+                                </div>
+                            </div>
                             <form onSubmit={handleSubmit(modifyData) }>
                                 <div className="card-section-create-user py-3">
                                     <p className="card-text-lable-user py-2">Account</p>
@@ -213,6 +256,10 @@ const SettingAccount = () =>{
                                         <button className="btn-send-save-settings" type="submit">Save</button>
                                     </div>
                                 </div>
+                                    {modif && <div className="alert alert-success my-2">
+                                        Your profile was successfully modified
+                                </div> }
+                                
                             </form>
                             <div className="card-section-create-user py-3">
                                 <p className="card-text-lable-user py-2">Security</p>

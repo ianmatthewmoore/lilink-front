@@ -19,6 +19,7 @@ let schema = yup
 const Login = () =>{
 
     const [isErr,setIsErr] = useState(false)
+    const [success,setSucces] = useState(false)
 
     const {
         register,
@@ -33,11 +34,18 @@ const Login = () =>{
     async function signUp(datas) {
         loginMutation.mutate(datas, {
             onSuccess: async (dataUser) => {
-                console.log(dataUser)
                 localStorage.setItem("token",dataUser.token)
+                setSucces(true)
+                setTimeout(()=>{
+                    window.location.href="/home"
+                    setSucces(false)
+                },4000)
             },
             onError: (err) => {
                 setIsErr(true)
+                setTimeout(()=>{
+                    setIsErr(false)
+                },2000)
             },
         });
     }
@@ -57,6 +65,9 @@ const Login = () =>{
                         {isErr && <div className="alert alert-danger" style={{fontSize:"14px"}}>
                             Failed to login, please verify your information !
                         </div>}
+                        {success && <div className="alert alert-success" style={{fontSize:"14px"}}>
+                            You are successfully login. redirecting ...
+                        </div> }
                         <div className="py-3">
                             <input placeholder="Email" className="input-auth"  type="text" {...register("email")}/>
                             {errors?.email?.type ===

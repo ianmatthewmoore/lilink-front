@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGigById } from "../../api/gig";
+import { Stripe } from "../../components/pay/stripeContainer";
 import ReviewsComp from "../../components/profile/reviews-section/reviews-section";
 import AboutGigSection from "../../components/services-page/about-gig-section/about-gig-section";
 import AboutGigSellerBid from "../../components/services-page/about-gigs-seller/about-gigs-seller";
@@ -38,25 +39,8 @@ const Service = () =>{
 
     return(
         
-        <div className="">
-            <LoggedHeader></LoggedHeader>
-            <HeaderJobs></HeaderJobs>
-                {!isLoading && data && <div className="custom-container">
-                <PreviewSection gig={data}></PreviewSection>
-                <div className="row d-flex justify-content-between">
-                    <div className="col-8">
-                        <AboutGigSection gig={data}></AboutGigSection>
-                        <AboutGigSellerBid gig={data}></AboutGigSellerBid>
-                        <ReviewsCompService ></ReviewsCompService>
-                    </div>
-                    <div className="col-4">
-                        <ServiceCard gig={data}></ServiceCard>
-                    </div>
-                </div>
-            </div>}
-            
-            <Footer></Footer>
-        </div>
+        <Stripe></Stripe>
+
     )
 }
 

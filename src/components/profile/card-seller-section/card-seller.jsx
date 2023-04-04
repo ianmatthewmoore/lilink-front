@@ -5,16 +5,15 @@ import './style.css'
 
 const CardSeller = (props) =>{
 
-    const [nbReviews,setnbReviews] = useState(0)
+    const [nbReviews,setnbReviews] = useState([])
 
     useEffect(()=>{
 
         if(props.user){
             console.log(props);
-            props.user?.gigs?.map(x=>{
-                console.log(x.reveiws?.length)
-                setnbReviews(old => old+ x.reveiws?.length)
-            })
+            setnbReviews(props.user?.custumer_review)
+            console.log(props.user?.custumer_review)
+            
         }
     },[props])
     
@@ -45,13 +44,13 @@ const CardSeller = (props) =>{
                                         <img src={process.env.PUBLIC_URL+'/images/star.png'} alt="current"/>
                                     
                                 </div>
-                                <p className="user-rating-heading-card ms-1">{props.user?.rating || "5"}</p>
-                                <p className="user-reveiew-heading-card ms-1">({nbReviews} Reviews)</p>
+                                <p className="user-rating-heading-card ms-1">{props.user?.rating.slice(0,5) || "5"}</p>
+                                <p className="user-reveiew-heading-card ms-1">({nbReviews.length} Reviews)</p>
                             </div>
                         </div>
                     </div>
                     <div className="pov-contact-seller">
-                        <Link to="/" className="btn-contact-me-pov">Contact Me</Link>
+                        <Link to={"/message/"+props.user?._id} className="btn-contact-me-pov">Contact Me</Link>
                     </div>
                     <div className="py-2">
                         <div className="main-data-user-ab ">

@@ -12,9 +12,14 @@ import {
 
 import { useSelector } from "react-redux";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { acceptProposal, createPropsal, rejectPropsal } from "../../api/proposal";
-import { useParams } from "react-router-dom";
+import { acceptProposal, createPropsal, rejectPropsal, uploadDeliveryFile } from "../../api/proposal";
+import { Link, useFetcher, useParams } from "react-router-dom";
 import { getUserByParams } from "../../api/user";
+import { socket } from "../../utils/socket";
+import { getConvUsers } from "../../api/conversation";
+import moment from "moment";
+
+
   const Messenger = ( ) =>{
       
     const [toggleOneModal, setToggleOneModal] = useState(false);
@@ -25,7 +30,13 @@ import { getUserByParams } from "../../api/user";
     const [gigSelect,setgigSelect]=useState(null);
     const [deliveryDate,setDeliveryDate] = useState("")
     const [priceData,setPriceData] = useState("")
+    const [messages,setMessages] = useState([])
+    const [textInput,setTextInput] = useState("")
+    const [convId,setConvId] = useState(null)
+    const [object,setObject] = useState(null)
+    const [successCreate,setSuccessCreate] = useState(false)
     
+    const user = useSelector(state => state.user);
     const [
         descriptionCreateGig,setDescriptionCreateGig
     ] = useState("")
@@ -35,25 +46,46 @@ import { getUserByParams } from "../../api/user";
         queryFn: async () => {
             const userIO = await getUserByParams(id);
             setusers(userIO)
-            console.log(userIO)
-            return user;
+            return userIO;
           
         },
         refetchOnWindowFocus: false,
       });
 
-      useEffect(()=>{
-        refetch()
-      },[id])
+      const { isLoading:loadingConv, data:dataConv, refetch:refetchUser } = useQuery({
+        queryKey: ["rzewrdite"],
+        queryFn: async () => {
+        
+            let userIO = await getConvUsers(JSON.stringify([user.user?._id,id]));
+            if(userIO?.messages.length>0)
+                setMessages(userIO?.messages )
+            setConvId(userIO?._id)
 
-    const user = useSelector(state => state.user);
+            return userIO;
+          
+        },
+        refetchOnWindowFocus: false,
+        enabled:false
+      });
+
+      useEffect(()=>{
+            refetch()
+            refetchUser()
+            
+        },[id,user])
+        
+
+
     const proposalMutation = useMutation(createPropsal)
+    const addFile = useMutation(uploadDeliveryFile)
+
+    const [array,setArryImage]=useState(null)
     
     function deliveryOrder(){
         
         let data = {
-            customerId:"641dd73e285d91fffd578825",
-            email:"alatouatiii123@gmail.com",
+            customerId:users?._id,
+            email:users?.email,
             title:gigSelect.title,
             description:descriptionCreateGig,
             services:gigSelect.service,
@@ -72,10 +104,53 @@ import { getUserByParams } from "../../api/user";
             });
         
 
-    }
+    };
+    useEffect(()=>{
+        socket.on("verify message",(data)=>{
+            setMessages(msg => [...msg,data])
+        })
+    },[]);
 
-    const sendMessage = () =>{
+    function uploadDeliveryFileTomsg(e){
+
+        let formData = new FormData();
         
+        formData.append('file',e.target.files[0])
+        addFile.mutate(formData, {
+            onSuccess: async (dataUser) => {
+                setArryImage(dataUser.fileName)
+              },
+              onError: (err) => {
+              },
+          });
+      } 
+    useEffect(()=>{
+        if(convId!= null)
+        socket.emit('join-room',convId)
+    },[convId])
+    
+    const getEmailSend = () =>{
+        let data = {
+            text:textInput,
+          
+            sender:{firstName:user.user?.firstName ,  id:user.user?._id,
+            lastName:user.user?.lastName},
+            receiver:id,
+            convId,
+            participants : [user.user?._id,id],
+            file:array,
+            photo:user.user?.photo,
+        }
+        let datas = {
+            idOwner:user.user?._id,
+            receivers:users._id,
+            content:user.user?.firstName+ " " +user.user?.lastName+" Sent you a message",
+            link:user.user?._id,
+            type:"message",
+            send_date:Date.now(),
+        }
+        socket.emit('new notif',datas)
+        socket.emit('new message',data)
     }
 
     const accpetMutation = useMutation(acceptProposal);
@@ -87,7 +162,11 @@ import { getUserByParams } from "../../api/user";
     function acceptOffer(id){
         accpetMutation.mutate(id, {
             onSuccess: async ({msg}) => {
-                
+                setSuccessCreate(true)
+                setTimeout(()=>{
+                    setSuccessCreate(false)
+                    window.location.href ="/order/" + msg.reference
+                },4000)
             },
             onError: (err) => {
                 setIsErr(true)
@@ -98,7 +177,7 @@ import { getUserByParams } from "../../api/user";
     function rejectOffer(id){
         rejectMutation.mutate(id, {
             onSuccess: async (dataUser) => {
-                alert('offer was rejected')
+                console.log('offer was rejected')
             },
             onError: (err) => {
                 setIsErr(true)
@@ -117,19 +196,19 @@ import { getUserByParams } from "../../api/user";
             <div className="d-flex">
                 <div className="all-conv-message">
                     <div className="d-flex">
-                            <div className="p-3"style={{width:"25%",borderBottom:"1px solid var(--color-grey)"}}> 
+                            <div className="p-3 d-flex justify-content-start align-items-center"style={{width:"25%",borderBottom:"1px solid var(--color-grey)"}}> 
                                 <p className="text-type-section">All Conversations</p>
                             </div>
                             <div className="" style={{width:"75%"}}>
-                              
+
                                 <div className="messenger-text-box">
                                     <div className="d-flex align-items-center">
                                         <div className="">
-                                            <img src={process.env.PUBLIC_URL+"/images/Ellipse 45.png"} alt=""/>
+                                            <img src={"http://localhost:3005/public/images/"+users?.photo} alt="" style={{width:"48px",height:"48px"}}/>
                                         </div>
                                         <div className="text-header-line ms-3">
-                                    <p>{!isLoading && users && users?.firstName +" "+ users?.lastName}</p>
-                                    <p>Your Time : </p>
+                                    <p className="text-about-message-sender">{!isLoading && users && users?.firstName +" "+ users?.lastName}</p>
+                                    <p style={{color:"var(--color-grey",fontWeight:"600"}} >{users?.country} </p>
                                     </div>
                                     </div>
                                 </div>
@@ -138,72 +217,92 @@ import { getUserByParams } from "../../api/user";
                     <div className="d-flex">
 
                         <div className="width-box-message">
+                            {
+                                user.status=="succeeded" && user.user.convs.map(x=>{
+                                    return(
+                                        x.participants.map( y=>{
+                                            return(
+        
+                                            <>
+                                            
+                                            { 
+                                            y._id != user.user._id &&
+                                            <Link to={"/message/"+y._id}>
+                                            
+                                             <div className="box-card-title-image" >
+                                             <div className="me-2">
+                                                 <img src={"http://localhost:3005/public/images/"+y.photo} alt="" style={{width:"64px",height:"64px",borderRadius:"50%"}}/>
+                                             </div>
+                                             <div className="">
+                                                 <p className="text-image-box-message-name">{y.firstName+" "+y.lastName}</p>
+                                                 <p className="text-image-box-message-content">{x.messages[0]?.text}</p>
+                                             </div>
+                                            </div>    
+                                            </Link>
+                                            }
+                                           
+                                            </>
+                                            )
+                                        })
+                                    )
+                                })
+                                
+                            }
                             
-                            <div className="box-card-title-image">
-                                <div className="me-2">
-                                    <img src={process.env.PUBLIC_URL + '/images/user-image.png'} alt="" style={{width:"64px",height:"64px",borderRadius:"50%"}}/>
-                                </div>
-                                <div className="">
-                                    <p className="text-image-box-message-name">Christopher Campbell</p>
-                                    <p className="text-image-box-message-content">In front of the Bar, about whicsdsdsdsdscsds dssdsdsd sd</p>
-                                </div>
-                            </div>
-                            <div className="box-card-title-image">
-                                <div className="me-2">
-                                    <img src={process.env.PUBLIC_URL + '/images/user-image.png'} alt="" style={{width:"64px",height:"64px",borderRadius:"50%"}}/>
-                                </div>
-                                <div className="">
-                                    <p className="text-image-box-message-name">Christopher Campbell</p>
-                                    <p className="text-image-box-message-content">In front of the Bar, about whicsdsdsdsdscsds dssdsdsd sd</p>
-                                </div>
-                            </div>
-                            <div className="box-card-title-image">
-                                <div className="me-2">
-                                    <img src={process.env.PUBLIC_URL + '/images/user-image.png'} alt="" style={{width:"64px",height:"64px",borderRadius:"50%"}}/>
-                                </div>
-                                <div className="">
-                                    <p className="text-image-box-message-name">Christopher Campbell</p>
-                                    <p className="text-image-box-message-content">In front of the Bar, about whicsdsdsdsdscsds dssdsdsd sd</p>
-                                </div>
-                            </div>
+
                         </div>
                         <div className="width-lg-box-message">
                             <div className="background-chat-message-box">
                                 <div className="box-message pt-4">
-                                    <div className="user-message">
-                                    <div className="d-flex align-items-center px-3 py-2">
-                                        <div className="">
-                                            <img src={process.env.PUBLIC_URL+"/images/Ellipse 45.png"} alt=""/>
+                                    <div     className="user-message">
+                                    {messages?.map(msg =>{
+                                    return(
+                                        <div>
+                                            <div className="d-flex align-items-center px-3 py-2">
+                                            <div className="">
+                                                <img src={"http://localhost:3005/public/images/"+msg.photo} alt="" style={{height:"48ox",width:"48px"}}/>
+                                            </div>
+                                            <div className="text-header-line ms-3">
+                                                <p className="text-username-own-message">{msg.sender?.firstName + " " + msg.sender?.lastName}</p>
+                                                <p className="text-username-own-message-content">{msg.text}</p>
+                                                <a target="_blank" href={"http://localhost:3005/public/files/"+msg.file} download={true}>{msg.file}</a>
+
+                                            </div>
+                                            </div>
                                         </div>
-                                        <div className="text-header-line ms-3">
-                                            <p className="text-username-own-message">Usama</p>
-                                            <p className="text-username-own-message-content">Your Time : </p>
-                                        </div>
-                                    </div>
-                                    <div className="d-flex align-items-center px-3 py-2">
-                                        <div className="">
-                                            <img src={process.env.PUBLIC_URL+"/images/Ellipse 45.png"} alt=""/>
-                                        </div>
-                                        <div className="text-header-line ms-3">
-                                            <p className="text-username-ext-message">Usama</p>
-                                            <p className="text-username-ext-message-content">Your Time : </p>
-                                        </div>
-                                    </div>
+                                        
+                                    )
+                                    })}
+                                   
+
                                     </div>
                                 </div>
                                 <div className="px-3" style={{position:"relative"}}>
-                                    <input type="text" className="input-message-send-text-user" />
-                                    <div className="pos-text-user-send-icon-svg">
+                                    <input type="text" className="input-message-send-text-user" onChange={e => setTextInput(e.target.value)}/>
+                                    <div className="pos-text-user-send-icon-svg" onClick={getEmailSend}>
                                         <img src={process.env.PUBLIC_URL+"/images/deliverymsg.svg"} alt="sned"/>
                                     </div>
+                                    <input type="file" onChange={e => uploadDeliveryFileTomsg(e)} />
+
                                 </div>
+                                    
+                                    
+                                {
+                                        user.type === "CONSULTANT" && 
+                                        <div className="p-3 d-flex justify-content-end" style={{width:"100%"}}>
+                                            <div style={{width:"50%"}} className="d-flex align-items-center justify-content-end">
+                                            <p style={{fontSize:"16px",color:"var(--color-pink)"}} className="me-3"> {textInput.length}/2500</p>
+                                            <button  className="btn-secnd-offer-to-user" onClick={() => setToggleOneModal(!toggleOneModal)}>Create Offer</button>
+                                        </div> 
+                                        </div>
+                                        }
+                                    
+                                    
+                                
                             </div>
 
                             <div className="">
-                                {
-                                    user.type === "CONSULTANT" && <button  className="btn-secnd-offer-to-user" onClick={() => setToggleOneModal(!toggleOneModal)}>OPEN FIRST MODAL</button>
-                                    
-                                }
+                               
 
                                 <MDBModal show={toggleOneModal} setShow={setToggleOneModal} tabIndex='-1' >
                                 <MDBModalDialog size="lg" centered>
@@ -319,64 +418,83 @@ import { getUserByParams } from "../../api/user";
                             </div>
                         </div>
                         <div className="width-box-message">
-                            <div className="box-card-title-image">
+                            <div className="box-card-title-image" style={{width:"100%",display:"block"}}>
                                 <div className="px-3">
-                                        <p className="text-about-us-message">About usama</p>
-                                        <div className="box-conx-card">
-                                            <div className="d-flex">
-                                                <p className="desc-service-gig-sec-msg">Languages</p>
-                                            </div>
-                                            <div className="">
-                                                <p className="text-desc-info-seller-msg">French,English</p>
-                                            </div>
-                                        </div>
-                                        <div className="box-conx-card">
-                                            <div className="d-flex">
-                                                <div className="me-2">
-                                                    <img src={process.env.PUBLIC_URL + "/images/deli.svg"} alt="loc"/>
-                                                </div>
-                                                <p className="desc-service-gig-sec-msg">Last Delivery</p>
-                                            </div>
-                                            <div className="">
-                                                <p className="text-desc-info-seller-msg">About 4 hours</p>
-                                            </div>
-                                        </div>
+                                        <p className="text-about-us-message">About {users?.firstName + " "+users?.lastName}</p>
+                                        <div className="py-2">
+                        <div className="main-data-user-ab ">
+                            <div className="d-flex justify-content-between py-2" >
+                                    <div className="pos-locate-user-seller ">
+                                        <img src={process.env.PUBLIC_URL+"/images/liloc.svg"} alt="liloc.svg"  className="img-width me-1"/>
+                                        <p className="ref-card-user">From</p>
+                                    </div>
+                                    <div className="loca-user-info-desc">
+                                        <p className="text-ref-loca-user">{users?.country}</p>
+                                    </div>
+                            </div>
+                        </div>
+                        <div className="main-data-user-ab">
+                            <div className="d-flex justify-content-between py-2">
+                                    <div className="pos-locate-user-seller ">
+                                        <img src={process.env.PUBLIC_URL+"/images/liuser.svg"} alt="liloc.svg"  className="img-width me-1"/>
+                                        <p className="ref-card-user">Member since</p>
+                                    </div>
+                                    <p className="text-ref-loca-user">{moment(users?.createdAt).format("MMM Do YY")}</p>
+                            </div>
+                        </div>
+                        <div className="main-data-user-ab">
+                            <div className="d-flex justify-content-between py-2">
+                                    <div className="pos-locate-user-seller ">
+                                        <img src={process.env.PUBLIC_URL+"/images/deli.svg"} alt="liloc.svg"  className="img-width me-1"/>
+                                        <p className="ref-card-user">Last devliery</p>
+                                    </div>
+                                    <p className="text-ref-loca-user">1 day</p>
+                            </div>
+                        </div>
+                    </div>
                                 </div>
                             </div>      
                             <div className="box-card-title-image">
                                 <div style={{overflowY:"auto",width:"100%",height:"450px"}}>
-                                {user.user?.orders.length > 0 && user.user?.orders.map(x=>{
+                                {
+                                successCreate && <div className="alert alert-success">
+                                    Offer successfully Accepted
+                                </div>
+                                }
+                                {user.user?.offers.length > 0 && user.user?.offers.map(x=>{
                                     return(
-                                        
-                                        <div className="px-3">
-                                            <div className="d-flex justify-content-between">
-                                                <div style={{width:"30%"}}>
-                                                    <img   />
-                                                </div>
+                                    
+                                        <>
+                                            {x.consultantId._id == id && user.user?._id == x.customerId._id  && x.status=="PENDING" && <div className="px-3">
                                                 <div className="">
-                                                
-                                                {x.title}
-                                                </div>
+                                                    <div style={{width:"100%"}}>
+                                                        <img src={'http://localhost:3005/public/images/'+x.gigs?.images[0]}  style={{width:"100%"}} />
+                                                    </div>
+                                                    <div className="py-2" >
+                                                    
+                                                    <p className="box-title-offer-about">{x.title}</p>
+                                                    </div>
 
-                                            </div>
-                                            <div className="">
-                                                <p>{x.description}</p>
-                                            </div>
-                                            <div className="">
-                                                <p>${x.price}</p>
-                                            </div>
-                                            <div className="">
-                                                <p>{x.delivery}</p>
-                                            </div>
-                                            <div className="d-flex justify-content-between">
-                                                <div className="w-45">
-                                                    <button style={{width:"100%"}} onClick={e => acceptOffer(x._id)}>Accept</button>
                                                 </div>
-                                                <div className="w-45">
-                                                    <button style={{width:"100%"}} onClick={e => rejectOffer(x._id)}>Reject</button>
+                                                <div className="box-title-offer-about-2">
+                                                    <p className="box-title-offer-about-2">{x.description}</p>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div className="py-2">
+                                                    <p className="text-offer-title-box"><span className="text-offer-title-box-pink" style={{fontWeight:"600"}}>Price :</span> ${x.price}</p>
+                                                </div>
+                                                <div className="py-2">
+                                                    <p className="text-offer-title-box"><span className="text-offer-title-box-pink" style={{fontWeight:"600"}}>Dlivery Date : </span>  {x.delivery}</p>
+                                                </div>
+                                                    <div className="py-2">
+                                                        <button style={{width:"100%"}} className="pink-bnt-accept"  onClick={e => acceptOffer(x._id)}>Accept</button>
+                                                    </div>
+                                                    <div className="py-2">
+                                                        <button style={{width:"100%"}}  className="pink-bnt-reject" onClick={e => rejectOffer(x._id)}>Reject</button>
+                                                    </div>
+                                        
+                                            </div> }
+                                        </>
+                                       
                                     )
                                 })
                                 }

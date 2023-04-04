@@ -3,6 +3,7 @@
     border-bottom: 1px solid var(--color-grey);
     display: flex;
     align-items: center;
+    background: transparent;
 }
 .text-image-box-message-name{
     color: #BD3E4A;
@@ -24,6 +25,14 @@ font-weight: 600;
 line-height: 130%;    
 
 
+}
+.btn-secnd-offer-to-user{
+    background-color: white;
+    border: 1px solid var(--color-pink);
+    padding: 0.5rem;
+    color: #BD3E4A;
+    width: 60%;
+    
 }
 .text-username-own-message-content{
 color: #000000;
@@ -53,13 +62,18 @@ line-height: 130%;
     background: #EDEDEE;
 }
 .box-message{
-    height: 85%;
+    height: 62vh;
+    overflow-x: scroll;
 
 }
 .pos-text-user-send-icon-svg {
     position: absolute;
     top: 30%;
     right: 7%;
+}
+.box-card-title-image:hover{
+    background-color:rgba(255, 255, 255, 0.757);
+    cursor: pointer;
 }
 .input-message-send-text-user{
     height: 100%;
@@ -90,7 +104,7 @@ line-height: 130%;
     color: #000;
 }
 .price-offred-op{
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     color: #000;
     font-family: var(--font-futurabook);
 }
@@ -98,6 +112,53 @@ line-height: 130%;
     width: 100%;
     resize: none;
 }
+.box-title-offer-about{
+ font-family: var(--font-futurabook);
+ font-weight: 600;
+ color: #000;
+}
+.text-offer-title-box{
+    font-family: var(--font-futurabook);
+    color: #000;
+    font-size: 14px;
+}
+.pink-bnt-accept{
+    color: white;
+    background-color: var(--color-pink);
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+
+}
+.text-about-message-sender{
+    font-style: normal;
+font-weight: 700;
+font-size: 19px;
+line-height: 100%;
+/* or 28px */
+
+
+color: #000000;
+}
+.pink-bnt-reject{
+    color: var(--color-pink);
+    background-color: white;
+    border: 1px solid var(--color-pink);
+    outline: none;
+    padding: 0.5rem;
+
+}
+.text-offer-title-box-pink{
+    font-family: var(--font-futurabook);
+    color: var(--color-pink);
+    font-size: 14px;
+}
+.box-title-offer-about-2{
+    font-family: var(--font-futurabook);
+    font-weight: 400;
+    color:#000;
+   }
+
 .set-payment-offer{
     font-family: var(--font-futurabook);
     font-weight: 600;

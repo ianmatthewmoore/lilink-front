@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getGigById } from "../../../api/gig";
-import { getUserByParams } from "../../../api/user";
-import ReviewsCard from "../../../partials/reviews-card-section/reviews-card-section";
+import { getGigById } from "../../api/gig";
+import ReviewsCard from "../../partials/reviews-card-section/reviews-card-section";
 
-const ReviewsComp =(props) =>{
+
+const ReviewsCompService =(props) =>{
     const [getAllReview,setgetAllReview] = useState([])
     let {id} =useParams()
     const { isLoading, data, isError, isFetching, refetch } = useQuery({
         queryKey: ["rzewrite"],
         queryFn: async () => {
-            const user = await getUserByParams(id);
+            const user = await getGigById(id);
             console.log(user)
-            setgetAllReview(user.custumer_review)
+            setgetAllReview(user.reveiws)
             return user;
           
         },
@@ -41,4 +41,4 @@ const ReviewsComp =(props) =>{
     )
 }
 
-export default ReviewsComp ;
+export default ReviewsCompService ;
